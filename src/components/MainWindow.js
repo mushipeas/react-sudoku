@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-//import SudokuGrid from './SudokuGrid';
-import SudokuGrid2 from './SudokuGrid2';
+import SudokuGrid from './SudokuGrid';
 
 class MainWindow extends Component {
   render() {
     return (
       <div className="window">
-        <SudokuGrid2
+        <SudokuGrid
           grid={this.props.grid}
           newGrid={this.props.newGrid}
           updateGrid={this.props.updateGrid}
