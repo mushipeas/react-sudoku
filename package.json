@@ -18,7 +18,7 @@
     "deploy": "gh-pages -d build"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
-  "main": "index.js",
+  "main": "src/index.js",
   "author": "",
   "license": "ISC",
   "devDependencies": {
