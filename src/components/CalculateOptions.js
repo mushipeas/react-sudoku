@@ -9,11 +9,7 @@ export function CalculateOptions(grid) {
         let col = column(colIndex, grid); // whole column
         let sqr = square(rowIndex,colIndex,grid); // whole square
 
-        //console.log(row);
-        //console.log(col);
-        //console.log(sqr);
         let concatGrps = [].concat(row).concat(col).concat(sqr);
-        //console.log(concatGrps);
 
         options[Number(rowIndex)*9+Number(colIndex)] = checkOptions(concatGrps); //needs to be array of options
 
