@@ -53,14 +53,3 @@ class SudokuGrid extends Component {
     }
     
     export default SudokuGrid;
-    
-    // emmet test code (different versions) for generating the above html
-    // div>div.hor-$*9>div.vert-$*9
-    // div>div.hor-$[key='row']*9>div.vert-${$$}*9
-    // div>div.hor-$[key='row']*9>div.vert-$[key='box']{$$}*9
-    // div>div.row[key='hor-$']*9>div.box[key='vert-$']{$$}*9
-    // div.sudokuBox>div.row[key='hor-$']*9>div.box[key='vert-$']{$$}*9
-    // div.sudokuBoxContainer>div.sudokuBox>div.row[key='hor-$']*9>div.box[key='vert-$']{$$}*9
-    // div.sudokuBoxContainer>div.sudokuBox>div.row[key='row-$']*9>textarea.box[key='col-$' value={grid[$][$]}]*9
-    
-    
