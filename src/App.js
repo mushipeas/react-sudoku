@@ -5,7 +5,8 @@ import MainWindow from './components/MainWindow';
 import RightBox from './components/RightBox';
 import CalculateOptions from './components/CalculateOptions';
 import CalculateUniqueOptions from './components/CalculateUniqueOptions';
-import {iterateSolution1, iterateSolution2, rowify} from './components/Solver';
+import IsSolutionCorrect from './components/IsSolutionCorrect';
+import { iterateSolution1, iterateSolution2, rowify } from './components/Solver';
 
 class App extends Component {
 
@@ -21,11 +22,15 @@ class App extends Component {
     this.solveSol1 = this.solveSol1.bind(this);
     this.solveSol2 = this.solveSol2.bind(this);
     this.attemptFullSolve = this.attemptFullSolve.bind(this);
+    this.checkSolution = this.checkSolution.bind(this);
+    
+    this.isSolutionCorrect = new IsSolutionCorrect();
     //get initial state
     this.state = {
       grid: new Array(9).fill("").map(() => new Array(9).fill("").map(() => "")),
-      gridOptions : {},
-      uniqueOptions : {}
+      gridOptions: {},
+      uniqueOptions: {},
+      solved: false
     };
   }
 
@@ -43,7 +48,7 @@ class App extends Component {
       ["", "", "", "", "", "", "", "", ""]
     ]
 
-    this.setState({ grid })
+    this.setState({ grid });
   }
 
   // creates a 9x9 grid and populates it with data from ??
@@ -61,7 +66,7 @@ class App extends Component {
       ["", "", 5, "", 4, "", 1, "", 8]
     ]
 
-    this.setState({ grid })
+    this.setState({ grid });
   }
 
   newGrid2() {
@@ -78,7 +83,7 @@ class App extends Component {
       ["", 3, "", "", 2, 9, "", "", ""]
     ]
 
-    this.setState({ grid })
+    this.setState({ grid });
   }
 
   newGrid3() {
@@ -95,15 +100,15 @@ class App extends Component {
       ["", 9, 2, "", "", "", 4, "", 1]
     ]
 
-    this.setState({ grid })
+    this.setState({ grid });
   }
 
   updateGrid(vert, horiz, value) {
-    const grid = {...this.state.grid};
+    const grid = { ...this.state.grid };
     if (value === "") grid[vert][horiz] = value;
-    else grid[vert][horiz] = 1*value;
+    else grid[vert][horiz] = 1 * value;
 
-    this.setState({ grid })
+    this.setState({ grid });
   }
 
   calcOptions() {
@@ -131,20 +136,32 @@ class App extends Component {
   }
 
   attemptFullSolve(iterations) {
-    for(let i = 0; i<iterations; i++) {
-      this.solveSol1(10)
-      this.solveSol2(10)
+    for (let i = 0; i < iterations; i++) {
+      this.solveSol1(10);
+      this.solveSol2(10);
       //check if grid is solved and break;
     };
+  }
+
+  checkSolution() {
+    let solved = false;
+    if (this.isSolutionCorrect.checkGrid(this.state.grid)) {
+      console.log("The solution is correct!")
+      solved = true;
+    } else {
+      console.log("This is not the correct solution!")
+    }
+    this.setState({ solved });
   }
 
   render() {
     return (
       <div className="App">
-        <Header/>
+        <Header />
         <div className="body">
           <MainWindow
             grid={this.state.grid}
+            solved={this.state.solved}
             emptyGrid={this.emptyGrid}
             newGrid={this.newGrid}
             newGrid2={this.newGrid2}
@@ -155,8 +172,9 @@ class App extends Component {
             solveSol1={this.solveSol1}
             solveSol2={this.solveSol2}
             attemptFullSolve={this.attemptFullSolve}
+            checkSolution={this.checkSolution}
           />
-          <RightBox/>
+          <RightBox />
         </div>
       </div>
     );

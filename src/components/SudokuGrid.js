@@ -30,7 +30,7 @@ class SudokuGrid extends Component {
 
   col(row, grid) {
     return [...Array(9).keys()].map((col) => (
-      <textarea className="box" maxLength="1" onClick={this.clickHandler} key={`col-${col + 1}`} value={grid[row][col]} onChange={(e) => this.handleChange(e, row, col)}></textarea>
+      <textarea className="box" maxLength="1" onClick={this.clickHandler} key={`col-${col + 1}`} value={grid[row][col]} onChange={(e) => this.handleChange(e, row, col)} style={{ color: this.props.solved ? "Green" : "" }}></textarea>
     ))
   }
 

@@ -7,8 +7,10 @@ class MainWindow extends Component {
       <div className="window">
         <SudokuGrid
           grid={this.props.grid}
+          solved={this.props.solved}
           newGrid={this.props.newGrid}
           updateGrid={this.props.updateGrid}
+          checkSolution={this.props.checkSolution}
         />
         <div className="grid-choices">
           <p>Scenarios:
@@ -38,6 +40,9 @@ class MainWindow extends Component {
         </div>
         <div className="full-sol-button">
           <button onClick={() => this.props.attemptFullSolve(10)}>Attempt Full Solve</button>
+        </div>
+        <div className="check-sol-button">
+          <button onClick={() => this.props.checkSolution()}>Check Solution</button>
         </div>
       </div>
     )
