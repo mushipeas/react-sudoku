@@ -23,7 +23,7 @@ class App extends Component {
     this.solveSol2 = this.solveSol2.bind(this);
     this.attemptFullSolve = this.attemptFullSolve.bind(this);
     this.checkSolution = this.checkSolution.bind(this);
-    
+
     this.isSolutionCorrect = new IsSolutionCorrect();
     //get initial state
     this.state = {
@@ -162,11 +162,14 @@ class App extends Component {
           <MainWindow
             grid={this.state.grid}
             solved={this.state.solved}
+            newGrid={this.newGrid}
+            updateGrid={this.updateGrid}
+          />
+          <RightBox
             emptyGrid={this.emptyGrid}
             newGrid={this.newGrid}
             newGrid2={this.newGrid2}
             newGrid3={this.newGrid3}
-            updateGrid={this.updateGrid}
             calcOptions={this.calcOptions}
             calcUniqueOptions={this.calcUniqueOptions}
             solveSol1={this.solveSol1}
@@ -174,7 +177,6 @@ class App extends Component {
             attemptFullSolve={this.attemptFullSolve}
             checkSolution={this.checkSolution}
           />
-          <RightBox />
         </div>
       </div>
     );
