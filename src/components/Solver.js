@@ -1,7 +1,7 @@
 import CalculateOptions from './CalculateOptions';
 import CalculateUniqueOptions from './CalculateUniqueOptions';
 
-export function iterateSolution1(grid, iterLeft=1) {
+export function iterateSolution1(grid, iterLeft = 1) {
   const optionsGrid = CalculateOptions(grid);
   const updates = {};
   iterLeft -= 1;
@@ -36,7 +36,7 @@ export function iterateSolution1(grid, iterLeft=1) {
   }
 }
 
-export function iterateSolution2(grid, iterLeft=1) {
+export function iterateSolution2(grid, iterLeft = 1) {
   const optionsGrid = CalculateOptions(grid);
   const optionsOptionsGrid = CalculateUniqueOptions(rowify(optionsGrid));
   const updates = {};
@@ -76,8 +76,8 @@ export function iterateSolution2(grid, iterLeft=1) {
 // update grid
 function updateGrid(grid, updates) {
   for (let itemIndex in updates) {
-    let rowIndex = Math.floor(itemIndex/9);
-    let colIndex = itemIndex-rowIndex*9;
+    let rowIndex = Math.floor(itemIndex / 9);
+    let colIndex = itemIndex - rowIndex * 9;
     console.log(`Changing ${rowIndex}:${colIndex},(${itemIndex})   :  ${updates[itemIndex]}`)
     grid[rowIndex][colIndex] = updates[itemIndex];
   }
@@ -90,7 +90,7 @@ export function rowify(optionsGrid) {
   let output = new Array(9).fill("").map(() => new Array(9).fill("").map(() => ""));
   for (let rowIndex in output) {
     for (let colIndex in output) {
-      output[rowIndex][colIndex] = optionsGrid[Number(colIndex)+Number(rowIndex)*9];
+      output[rowIndex][colIndex] = optionsGrid[Number(colIndex) + Number(rowIndex) * 9];
     }
   }
   //console.log(output)

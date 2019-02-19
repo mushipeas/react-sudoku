@@ -4,8 +4,8 @@ class RightBox extends Component {
   render() {
     return (
       <div className="rightBox">
-      <p>Right Box</p>
-      <p>Placeholder for options.</p>
+        <p>Right Box</p>
+        <p>Placeholder for options.</p>
       </div>
     )
   }
