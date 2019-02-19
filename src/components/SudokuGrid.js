@@ -20,7 +20,7 @@ class SudokuGrid extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.newGrid();
   }
 
