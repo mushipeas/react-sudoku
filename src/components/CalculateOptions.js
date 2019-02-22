@@ -1,5 +1,5 @@
 export function CalculateOptions(grid) {
-  const options = {};
+  const options = [];
 
   for (let rowIndex in grid) {
     let row = grid[rowIndex]; // whole row

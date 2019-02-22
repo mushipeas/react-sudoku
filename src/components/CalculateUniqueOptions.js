@@ -1,5 +1,5 @@
 export function CalculateUniqueOptions(options) {
-  const uniqueOptions = {};
+  const uniqueOptions = [];
 
   for (let rowIndex in options) {
     let row = options[rowIndex]; // whole row
