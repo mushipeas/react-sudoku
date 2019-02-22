@@ -116,7 +116,7 @@ class App extends Component {
   }
 
   updateGrid(vert, horiz, value) {
-    const grid = { ...this.state.grid };
+    const grid = [ ...this.state.grid ];
     if (value === "") grid[vert][horiz] = value;
     else grid[vert][horiz] = 1 * value;
 
