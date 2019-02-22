@@ -3,9 +3,11 @@ import SudokuGrid from './SudokuGrid';
 
 class MainWindow extends Component {
   render() {
-    let correctSolution;
+    let checkSolutionMessage;
     if (this.props.solved) {
-      correctSolution = <p>Solution is Correct!</p>;
+      checkSolutionMessage = <p>Solution is Correct!</p>;
+    } else if (this.props.solved === false) {
+      checkSolutionMessage = <p>That's not a valid solution! :(</p>;
     }
 
     return (
@@ -26,7 +28,7 @@ class MainWindow extends Component {
         </div>
         <div className="check-sol-button">
           <button onClick={() => this.props.checkSolution()}>Check Solution</button>
-          {correctSolution}
+          {checkSolutionMessage}
         </div>
       </div>
     );

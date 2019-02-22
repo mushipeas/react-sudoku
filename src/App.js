@@ -30,7 +30,7 @@ class App extends Component {
       grid: new Array(9).fill("").map(() => new Array(9).fill("").map(() => "")),
       gridOptions: {},
       uniqueOptions: {},
-      solved: false
+      solved: null
     };
   }
 
@@ -48,7 +48,7 @@ class App extends Component {
       ["", "", "", "", "", "", "", "", ""]
     ]
 
-    let solved = false;
+    let solved;
 
     this.setState({ grid });
     this.setState({ solved });
@@ -69,7 +69,7 @@ class App extends Component {
       ["", "", 5, "", 4, "", 1, "", 8]
     ]
 
-    let solved = false;
+    let solved;
 
     this.setState({ grid });
     this.setState({ solved });
@@ -89,7 +89,7 @@ class App extends Component {
       ["", 3, "", "", 2, 9, "", "", ""]
     ]
 
-    let solved = false;
+    let solved;
 
     this.setState({ grid });
     this.setState({ solved });
@@ -109,7 +109,7 @@ class App extends Component {
       ["", 9, 2, "", "", "", 4, "", 1]
     ]
 
-    let solved = false;
+    let solved;
 
     this.setState({ grid });
     this.setState({ solved });
@@ -120,7 +120,7 @@ class App extends Component {
     if (value === "") grid[vert][horiz] = value;
     else grid[vert][horiz] = 1 * value;
 
-    let solved = false;
+    let solved;
 
     this.setState({ grid });
     this.setState({ solved });
