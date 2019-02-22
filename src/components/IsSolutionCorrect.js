@@ -1,3 +1,5 @@
+// 'checkGrid should be called - outputs a boolean confirmation if the sudoku grid meets completion criteria.
+
 class IsSolutionCorrect {
     checkGrid(grid) {
         return this.checkRows(grid) && this.checkColumns(grid) && this.checkSquares(grid);
