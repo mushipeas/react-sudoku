@@ -48,7 +48,10 @@ class App extends Component {
       ["", "", "", "", "", "", "", "", ""]
     ]
 
+    let solved = false;
+
     this.setState({ grid });
+    this.setState({ solved });
   }
 
   // creates a 9x9 grid and populates it with data from ??
@@ -66,7 +69,10 @@ class App extends Component {
       ["", "", 5, "", 4, "", 1, "", 8]
     ]
 
+    let solved = false;
+
     this.setState({ grid });
+    this.setState({ solved });
   }
 
   newGrid2() {
@@ -83,7 +89,10 @@ class App extends Component {
       ["", 3, "", "", 2, 9, "", "", ""]
     ]
 
+    let solved = false;
+
     this.setState({ grid });
+    this.setState({ solved });
   }
 
   newGrid3() {
@@ -100,7 +109,10 @@ class App extends Component {
       ["", 9, 2, "", "", "", 4, "", 1]
     ]
 
+    let solved = false;
+
     this.setState({ grid });
+    this.setState({ solved });
   }
 
   updateGrid(vert, horiz, value) {
@@ -108,7 +120,10 @@ class App extends Component {
     if (value === "") grid[vert][horiz] = value;
     else grid[vert][horiz] = 1 * value;
 
+    let solved = false;
+
     this.setState({ grid });
+    this.setState({ solved });
   }
 
   calcOptions() {
