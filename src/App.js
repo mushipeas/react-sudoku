@@ -162,20 +162,19 @@ class App extends Component {
           <MainWindow
             grid={this.state.grid}
             solved={this.state.solved}
-            newGrid={this.newGrid}
             updateGrid={this.updateGrid}
-          />
-          <RightBox
             emptyGrid={this.emptyGrid}
             newGrid={this.newGrid}
             newGrid2={this.newGrid2}
             newGrid3={this.newGrid3}
+            checkSolution={this.checkSolution}
+          />
+          <RightBox
             calcOptions={this.calcOptions}
             calcUniqueOptions={this.calcUniqueOptions}
             solveSol1={this.solveSol1}
             solveSol2={this.solveSol2}
             attemptFullSolve={this.attemptFullSolve}
-            checkSolution={this.checkSolution}
           />
         </div>
       </div>
