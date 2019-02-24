@@ -7,6 +7,7 @@ import CalculateOptions from './components/CalculateOptions';
 import CalculateUniqueOptions from './components/CalculateUniqueOptions';
 import IsSolutionCorrect from './components/IsSolutionCorrect';
 import { iterateSolution1, iterateSolution2, rowify } from './components/Solver';
+import BruteSolver from './components/BruteSolver';
 
 class App extends Component {
 
@@ -23,13 +24,15 @@ class App extends Component {
     this.solveSol2 = this.solveSol2.bind(this);
     this.attemptFullSolve = this.attemptFullSolve.bind(this);
     this.checkSolution = this.checkSolution.bind(this);
+    this.bruteSolve = this.bruteSolve.bind(this);
 
+    this.bruteSolver = new BruteSolver();
     this.isSolutionCorrect = new IsSolutionCorrect();
     //get initial state
     this.state = {
       grid: new Array(9).fill("").map(() => new Array(9).fill("").map(() => "")),
-      gridOptions: {},
-      uniqueOptions: {},
+      gridOptions: [],
+      uniqueOptions: [],
       solved: null
     };
   }
@@ -116,7 +119,7 @@ class App extends Component {
   }
 
   updateGrid(vert, horiz, value) {
-    const grid = [ ...this.state.grid ];
+    const grid = [...this.state.grid];
     if (value === "") grid[vert][horiz] = value;
     else grid[vert][horiz] = 1 * value;
 
@@ -158,6 +161,12 @@ class App extends Component {
     };
   }
 
+  bruteSolve() {
+    console.log(this.bruteSolver.solve(this.state.grid));
+    // const { grid } = this.bruteSolver.solve(this.state.grid);
+    // this.setState({ grid });
+  }
+
   checkSolution() {
     let solved = false;
     if (this.isSolutionCorrect.checkGrid(this.state.grid)) {
@@ -190,6 +199,7 @@ class App extends Component {
             solveSol1={this.solveSol1}
             solveSol2={this.solveSol2}
             attemptFullSolve={this.attemptFullSolve}
+            bruteSolve={this.bruteSolve}
           />
         </div>
       </div>

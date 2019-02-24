@@ -23,7 +23,10 @@ class RightBox extends Component {
           </p>
         </div>
         <div className="full-sol-button">
-          <button onClick={() => this.props.attemptFullSolve(10)}>Attempt Full Solve</button>
+          <button onClick={() => this.props.attemptFullSolve(10)}>Attempt Full Solve (M1+2)</button>
+        </div>
+        <div className="brute-sol-button">
+          <button onClick={() => this.props.bruteSolve()}>Brute Solve</button>
         </div>
       </div >
     )

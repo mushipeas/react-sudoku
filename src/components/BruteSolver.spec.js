@@ -1,6 +1,6 @@
 import BruteSolver from './BruteSolver';
 
-describe("Does an unfinished grid get completed correctly", () => {
+describe("Attempts to solve the input grid", () => {
 
     const unfinishedGrid = [
         [2, "", 9, "", 8, "", 5, "", ""],
@@ -23,7 +23,7 @@ describe("Does an unfinished grid get completed correctly", () => {
         [8, 5, "", "", "", 7, 6, "", ""],
         ["", 2, "", 8, 7, "", "", "", 9],
         ["", "", "", 1, 9, 6, 2, "", ""],
-        ["", "", 5, "", 4, "", 1, "", 8]
+        ["", "", 5, "", 4, "", 1, "", 9]
     ];
 
     const solvedGrid = [
@@ -48,9 +48,9 @@ describe("Does an unfinished grid get completed correctly", () => {
         expect(bruteSolver.solve(unfinishedGrid)).toEqual(solvedGrid)
     })
 
-    it("should send false if the grid is unsolvable", () => {
+    it("should return the original grid if the grid is unsolvable", () => {
 
-        expect(bruteSolver.solve(unsolvableGrid)).toThrowError('unsolvable');
+        expect(bruteSolver.solve(unsolvableGrid)).toEqual(unsolvableGrid);
     })
 
 })
