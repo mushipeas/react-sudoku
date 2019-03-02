@@ -11,7 +11,7 @@ class BruteSolve {
 
   solve(grid) {
     this.iterations = 0;
-    let iterativelyFilledGrid = this.iterativelyFillGrid(grid);
+    let iterativelyFilledGrid = this.recursivelyFillGrid(grid);
     if (iterativelyFilledGrid) {
       return iterativelyFilledGrid;
     } else {
@@ -19,7 +19,7 @@ class BruteSolve {
     }
   }
 
-  iterativelyFillGrid(grid, [row, col] = [0, 0]) {
+  recursivelyFillGrid(grid, [row, col] = [0, 0]) {
 
     this.iterations++;
 
@@ -45,7 +45,7 @@ class BruteSolve {
     if (optionsForElement.length === 0) {
 
       if (grid[row][col] === "") return false;
-      let returnedVal = this.iterativelyFillGrid(grid, this.nextCoordinate(row, col));
+      let returnedVal = this.recursivelyFillGrid(grid, this.nextCoordinate(row, col));
       if (returnedVal) return returnedVal;
 
     } else {
@@ -56,7 +56,7 @@ class BruteSolve {
         let newGrid = this.cloneDeep(grid);
         newGrid[row][col] = option;
 
-        let returnedVal = this.iterativelyFillGrid(newGrid, this.nextCoordinate(row, col));
+        let returnedVal = this.recursivelyFillGrid(newGrid, this.nextCoordinate(row, col));
         if (returnedVal) return returnedVal;
 
         // console.log(`branch ${option} of ${optionsForElement} at : [${[row, col]}] failed`)
