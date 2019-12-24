@@ -1,21 +1,27 @@
 import CalculateOptions from './CalculateOptions';
 import IsSolutionCorrect from './IsSolutionCorrect';
+import CheckConstraints from './CheckConstraints';
 
 const isSolCorrect = new IsSolutionCorrect();
+const constraints_met = new CheckConstraints();
 
 class BruteSolve {
   constructor() {
     this.iterations = 0;
-    this.maxIterations = 10000;
+    this.maxIterations = 100000;
   }
 
   solve(grid) {
     this.iterations = 0;
-    let iterativelyFilledGrid = this.recursivelyFillGrid(grid);
+    let iterativelyFilledGrid = this.iterativeFill(grid);
     if (iterativelyFilledGrid) {
-      return iterativelyFilledGrid;
+      return {
+        grid: iterativelyFilledGrid
+      };
     } else {
-      return grid;
+      return {
+        grid: grid
+      };
     }
   }
 
@@ -67,12 +73,77 @@ class BruteSolve {
     return false;
   }
 
+  iterativeFill(orig_grid) {
+    let grid = this.cloneDeep(orig_grid)
+
+    let i = 0
+    let j = 0
+    
+    while ( i >= 0 && i < 9) {
+      
+      this.iterations++;
+
+      if (this.iterations > this.maxIterations) {
+        console.table(grid);
+        console.log(`Max iterations hit: ${this.iterations}`)
+        return null
+        // throw new Error('Unsolvable. Iteration limit hit.');
+      }
+      
+      if (orig_grid[i][j] !== "") {
+        [i, j] = this.nextCoordinate(i, j);
+      }
+      
+      if (grid[i][j] === "") {
+        grid[i][j] = 1;
+      }
+
+      if (grid[i][j] > 9) {
+        grid[i][j] = "";
+        [i, j] = this.prevCoordinate(i, j)
+        while (i >= 0 && orig_grid[i][j] !== "") {
+          [i, j] = this.prevCoordinate(i, j);
+        }
+        if (i<0) { // unsolvable
+          console.table(grid);
+          console.log(`Unsolvable. Iterations: ${this.iterations}`)
+          return null
+        } 
+        grid[i][j]++;
+      }
+
+
+      if (constraints_met.grid(grid) && grid[i][j] <= 9) {
+        [i, j] = this.nextCoordinate(i, j);
+        while (i < 9 && orig_grid[i][j] !== "") {
+          [i, j] = this.nextCoordinate(i, j);
+        }
+      } else {
+        grid[i][j]++;
+      }
+    }
+
+    console.log(`Iterations for solution: ${this.iterations}`)
+    return grid;
+  }
+
+  
   nextCoordinate(row, col) {
     if (col < 8) {
       col++;
-    } else if (row < 8) {
+    } else {
       row++;
       col = 0;
+    }
+    return [row, col];
+  }
+
+  prevCoordinate(row, col) {
+    if (col > 0) {
+      col--;
+    } else {
+      row--;
+      col = 8;
     }
     return [row, col];
   }

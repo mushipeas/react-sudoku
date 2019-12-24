@@ -162,9 +162,8 @@ class App extends Component {
   }
 
   bruteSolve() {
-    console.log(this.bruteSolver.solve(this.state.grid));
-    // const { grid } = this.bruteSolver.solve(this.state.grid);
-    // this.setState({ grid });
+    const { grid } = this.bruteSolver.solve(this.state.grid);
+    this.setState({ grid });
   }
 
   checkSolution() {
