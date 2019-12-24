@@ -1,22 +1,48 @@
-React-Sudoku
+# React-Sudoku
 
+## About:
 Sodoku solver and (eventually) generator created with Javascript + React.
+There are 3 test grids, all of which can be solved by the iterative solver.
+
 Currently packaged with Create-React-App.
 
 [View on GitHub Pages](https://mushipeas.github.io/react-sudoku/)
 
-The solver currently iterates over 2 methods to fill out the unsolved scenario. A third method needs implementing to complete the hardest (non-guess based) sudoku puzzles.
-A fourth, brute-force method would also be useful to solve scenarios that require guessing.
+## Methods:
 
-Once the solver is complete, it can be used as a tester for generating new puzzles of specified difficulty.
+### CURRENT: Iterative Solver
+The iterative solver (now implemented) iteratively fills the grid, checking against `27 constraints`, with backtracking when the constraints are not met:
 
-Method 1: (Singles)
-Iterates over all squares for any that only have 1 candidate. Updates the grid with all such values found per run.
+- No duplicate numbers in any row or column (18)
+- No duplicate numbers in any 3x3 region (9)
 
-Method 2: (Hidden Singles)
-Iterates over all squares, checking all of its related squares to see if the selected square has any unique candidates in any of its 3 (row, col, sector) groups. Updates the grid with all such values found per run.
+The long-term plan is to use the iterations-to-solve (seen in the console) to gauge puzzle difficulty. This could be used as part of the puzzle generator to validate output.
 
-Method 3: (Naked/Hidden Pairs/Trips/Quads)
-Iterates over all squares, checking all of its related squares to see which candidates must be in other squares in its 3 groups, removing those candidates and seeing if this leads to any singles.
+Currently: `max_iterations = 100000`
 
-The code also contains 3 example scenarios used for testing. Currently 1 and 3 are solvable using Methods 1 and 2. Testcase 2 may be solvable once Method 3 is implemented.
+The iterative solver will solve any solvable grid. However, it might be interesting to implement the `CalculateOptions()` helper into it to reduce the number of iterations. That said, it would not add any real functional improvement.
+
+### DEPRECIATED: Recursive Solver
+This was recursively filling the grid using `CalculateOptions()` as a helper to reduce the candidates per square in the grid. This worked for Testcase 1 and 3.
+
+Despite the reduced branches due to the helper, attempting to solve Testcase 2 would lead to a stack overflow. Tail-call optimisation may have solved this, but the iterative solution appears to be far more functional.
+
+The helper function is still pretty useful, and might be good to integrate into the iterative solver, with some modifications.
+
+### DEPRECIATED: 'Smart' Solver
+This solver currently iterates over 2 methods to fill out the unsolved scenario. A third method needs implementing to complete the hardest (non-guess based) sudoku puzzles.
+
+    Method 1: (Singles)
+        Iterates over all squares for any that only have 1 candidate (a single). Updates the grid with all such values found per run.
+
+    Method 2: (Hidden Singles)
+        Iterates over all squares, checking all of its related squares to see if the selected square has any unique candidates in any of its 3 (row, col, sector) groups. Updates the grid with all such values found per run.
+
+### TO-DO
+
+    Method 3: (Naked/Hidden Pairs/Trips/Quads)
+        Iterates over all squares, checking all of its related squares to see which candidates must be in other squares in its 3 groups, removing those candidates and seeing if this leads to any new squares with 1 candidate.
+
+The 3 example scenarios:
+
+Currently Test 1 and Test 3 are solvable using a combination of methods 1 and 2. Testcase 2 may be solvable once Method 3 is implemented. Currently the iterative solver is the only guaranteed method for solving random scenarios.
