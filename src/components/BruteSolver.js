@@ -25,6 +25,7 @@ class BruteSolve {
     }
   }
 
+  // DEPRECIATED METHOD. Left here for comparison
   recursivelyFillGrid(grid, [row, col] = [0, 0]) {
 
     this.iterations++;
