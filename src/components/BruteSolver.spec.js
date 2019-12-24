@@ -45,12 +45,12 @@ describe("Attempts to solve the input grid", () => {
 
     it("should solve an unfinished grid", () => {
 
-        expect(bruteSolver.solve(unfinishedGrid)).toEqual(solvedGrid)
+        expect(bruteSolver.solve(unfinishedGrid)['grid']).toEqual(solvedGrid)
     })
 
     it("should return the original grid if the grid is unsolvable", () => {
 
-        expect(bruteSolver.solve(unsolvableGrid)).toEqual(unsolvableGrid);
+        expect(bruteSolver.solve(unsolvableGrid)['grid']).toEqual(unsolvableGrid);
     })
 
 })
