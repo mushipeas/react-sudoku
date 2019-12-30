@@ -21,7 +21,7 @@ class SudokuGrid extends Component {
   }
 
   componentDidMount() {
-    this.props.newGrid();
+    this.props.newGrid('grid_01');
   }
 
   clickHandler(e) {

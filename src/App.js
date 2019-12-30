@@ -8,15 +8,14 @@ import CalculateUniqueOptions from './components/CalculateUniqueOptions';
 import IsSolutionCorrect from './components/IsSolutionCorrect';
 import { iterateSolution1, iterateSolution2, rowify } from './components/Solver';
 import BruteSolver from './components/BruteSolver';
+import { grid_templates } from './common/grid_templates';
+import { clone_deep } from './common/helper_functions';
 
 class App extends Component {
 
   constructor() {
     super();
-    this.emptyGrid = this.emptyGrid.bind(this);
     this.newGrid = this.newGrid.bind(this);
-    this.newGrid2 = this.newGrid2.bind(this);
-    this.newGrid3 = this.newGrid3.bind(this);
     this.updateGrid = this.updateGrid.bind(this);
     this.calcOptions = this.calcOptions.bind(this);
     this.calcUniqueOptions = this.calcUniqueOptions.bind(this);
@@ -30,87 +29,17 @@ class App extends Component {
     this.isSolutionCorrect = new IsSolutionCorrect();
     //get initial state
     this.state = {
-      grid: new Array(9).fill("").map(() => new Array(9).fill("").map(() => "")),
+      grid: grid_templates.grid_empty,
       gridOptions: [],
       uniqueOptions: [],
       solved: null
     };
   }
 
-  emptyGrid() {
-    //
-    const grid = [
-      ["", "", "", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", "", "", ""]
-    ]
-
-    let solved;
-
-    this.setState({ grid });
-    this.setState({ solved });
-  }
-
-  // creates a 9x9 grid and populates it with data from ??
-  newGrid() {
-    //
-    const grid = [
-      [2, "", 9, "", 8, "", 5, "", ""],
-      ["", "", 4, 7, 6, 9, "", "", ""],
-      [3, "", "", "", 1, 2, "", 4, ""],
-      ["", "", 3, 6, "", "", "", 5, 4],
-      ["", 4, "", "", "", "", "", 8, ""],
-      [8, 5, "", "", "", 7, 6, "", ""],
-      ["", 2, "", 8, 7, "", "", "", 9],
-      ["", "", "", 1, 9, 6, 2, "", ""],
-      ["", "", 5, "", 4, "", 1, "", 8]
-    ]
-
-    let solved;
-
-    this.setState({ grid });
-    this.setState({ solved });
-  }
-
-  newGrid2() {
-    //
-    const grid = [
-      ["", "", "", 6, 7, "", "", 4, ""],
-      [1, "", "", "", "", "", "", 3, 6],
-      ["", 4, 2, 1, "", "", "", "", ""],
-      [4, "", "", 7, "", "", "", "", ""],
-      ["", "", 5, "", "", "", 3, "", ""],
-      ["", "", "", "", "", 2, "", "", 8],
-      ["", "", "", "", "", 1, 6, 7, ""],
-      [5, 8, "", "", "", "", "", "", 3],
-      ["", 3, "", "", 2, 9, "", "", ""]
-    ]
-
-    let solved;
-
-    this.setState({ grid });
-    this.setState({ solved });
-  }
-
-  newGrid3() {
-    //
-    const grid = [
-      [8, "", 3, "", "", "", 2, 1, 9],
-      [9, "", 5, "", 1, "", 7, "", ""],
-      ["", 6, 1, 9, "", "", 3, "", ""],
-      [2, 3, 4, 5, 6, 1, 9, "", ""],
-      [1, 8, 9, 4, 3, 7, 5, 2, 6],
-      ["", "", "", "", "", 9, 1, 4, 3],
-      ["", "", "", "", "", 4, 8, 9, ""],
-      ["", "", 8, "", 9, "", 6, "", 5],
-      ["", 9, 2, "", "", "", 4, "", 1]
-    ]
+  // creates a 9x9 grid and populates it with data from grid_templates file
+  newGrid(grid_id = 'grid_empty') {
+    
+    const grid = clone_deep(grid_templates[grid_id]);
 
     let solved;
 
@@ -186,10 +115,7 @@ class App extends Component {
             grid={this.state.grid}
             solved={this.state.solved}
             updateGrid={this.updateGrid}
-            emptyGrid={this.emptyGrid}
             newGrid={this.newGrid}
-            newGrid2={this.newGrid2}
-            newGrid3={this.newGrid3}
             checkSolution={this.checkSolution}
           />
           <RightBox

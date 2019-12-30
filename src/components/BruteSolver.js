@@ -1,6 +1,7 @@
 import CalculateOptions from './CalculateOptions';
 import IsSolutionCorrect from './IsSolutionCorrect';
 import CheckConstraints from './CheckConstraints';
+import { clone_deep } from '../common/helper_functions';
 
 const isSolCorrect = new IsSolutionCorrect();
 const constraints_met = new CheckConstraints();
@@ -60,7 +61,7 @@ class BruteSolve {
 
         // console.log(`trying ${option} of ${optionsForElement} at : [${[row, col]}]`)
 
-        let newGrid = this.cloneDeep(grid);
+        let newGrid = clone_deep(grid);
         newGrid[row][col] = option;
 
         let returnedVal = this.recursivelyFillGrid(newGrid, this.nextCoordinate(row, col));
@@ -75,7 +76,7 @@ class BruteSolve {
   }
 
   iterativeFill(orig_grid) {
-    let grid = this.cloneDeep(orig_grid)
+    let grid = clone_deep(orig_grid)
 
     let i = 0
     let j = 0
@@ -147,14 +148,6 @@ class BruteSolve {
       col = 8;
     }
     return [row, col];
-  }
-
-  cloneDeep(grid) {
-    let gridClone = [];
-    for (let row of grid) {
-      gridClone.push([...row]);
-    }
-    return gridClone;
   }
 
   // update grid //copied from solver.js. Needs consolidation later.
