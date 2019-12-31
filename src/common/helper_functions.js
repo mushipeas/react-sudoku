@@ -27,3 +27,9 @@ export function get_square(grid, squareIndex) {
     }
     return square
 }
+
+export function* range(start, end) {
+    for (let i = start; i < end; i++) {
+        yield i;
+    }
+}
