@@ -6,10 +6,9 @@ import RightBox from './components/RightBox';
 import CalculateOptions from './components/CalculateOptions';
 import CalculateUniqueOptions from './components/CalculateUniqueOptions';
 import IsSolutionCorrect from './components/IsSolutionCorrect';
-import { iterateSolution1, iterateSolution2, rowify } from './components/Solver';
+import { iterateSolution1, iterateSolution2 } from './components/Solver';
 import BruteSolver from './components/BruteSolver';
 import { grid_templates } from './common/grid_templates';
-import { clone_deep } from './common/helper_functions';
 
 class App extends Component {
 
@@ -36,10 +35,10 @@ class App extends Component {
     };
   }
 
-  // creates a 9x9 grid and populates it with data from grid_templates file
+  // clones 81 len array from grid_templates file
   newGrid(grid_id = 'grid_empty') {
     
-    const grid = clone_deep(grid_templates[grid_id]);
+    const grid = [...grid_templates[grid_id]];
 
     let solved;
 
@@ -49,8 +48,8 @@ class App extends Component {
 
   updateGrid(vert, horiz, value) {
     const grid = [...this.state.grid];
-    if (value === "") grid[vert][horiz] = value;
-    else grid[vert][horiz] = 1 * value;
+    if (value === "") grid[vert*9 + horiz] = value;
+    else grid[vert*9 + horiz] = 1 * value;
 
     let solved;
 
@@ -66,14 +65,13 @@ class App extends Component {
 
   calcUniqueOptions() {
     const gridOptions = CalculateOptions(this.state.grid);
-    const uniqueOptions = CalculateUniqueOptions(rowify(gridOptions));
+    const uniqueOptions = CalculateUniqueOptions(gridOptions);
     this.setState({ uniqueOptions });
     console.table(uniqueOptions);
   }
 
   solveSol1(iterations) {
     const { grid } = iterateSolution1(this.state.grid, iterations);
-    //console.log(iterLeft);
     this.setState({ grid });
   }
 
@@ -86,7 +84,6 @@ class App extends Component {
     for (let i = 0; i < iterations; i++) {
       this.solveSol1(10);
       this.solveSol2(10);
-      //check if grid is solved and break;
     };
   }
 

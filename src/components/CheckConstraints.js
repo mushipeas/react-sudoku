@@ -1,3 +1,5 @@
+import { get_row, get_col, get_square } from '../common/helper_functions';
+
 class CheckConstraints {
     grid(grid) {
         return this.checkRows(grid) && this.checkColumns(grid) && this.checkSquares(grid);
@@ -5,7 +7,7 @@ class CheckConstraints {
     
     checkRows(grid) {
         for (let rowIndex = 0; rowIndex < 9; rowIndex++) {
-            let row = grid[rowIndex];
+            let row = get_row(grid, rowIndex);
             if (this.hasDuplicates(row)) { return false }
         }
         return true;
@@ -13,7 +15,7 @@ class CheckConstraints {
     
     checkColumns(grid) {
         for (let columnIndex = 0; columnIndex < 9; columnIndex++) {
-            let column = grid.map(row => row[columnIndex]);
+            let column = get_col(grid, columnIndex);
             if (this.hasDuplicates(column)) { return false }
         }
         return true;
@@ -21,9 +23,7 @@ class CheckConstraints {
     
     checkSquares(grid) {
         for (let squareIndex = 0; squareIndex < 9; squareIndex++) {
-            let square = grid.filter((val, rowIndex) => Math.floor(rowIndex / 3) === Math.floor(squareIndex / 3))
-                             .map(x => x.slice((squareIndex % 3) * 3, (squareIndex % 3) * 3 + 3))
-                             .flat();
+            let square = get_square(grid, squareIndex)
             if (this.hasDuplicates(square)) { return false }
         }
         return true;
