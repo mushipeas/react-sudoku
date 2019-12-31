@@ -6,7 +6,7 @@ import RightBox from './components/RightBox';
 import CalculateOptions from './components/CalculateOptions';
 import CalculateUniqueOptions from './components/CalculateUniqueOptions';
 import IsSolutionCorrect from './components/IsSolutionCorrect';
-import { iterateSolution1, iterateSolution2, rowify } from './components/Solver';
+import { iterateSolution1, iterateSolution2 } from './components/Solver';
 import BruteSolver from './components/BruteSolver';
 import { grid_templates } from './common/grid_templates';
 
@@ -65,14 +65,13 @@ class App extends Component {
 
   calcUniqueOptions() {
     const gridOptions = CalculateOptions(this.state.grid);
-    const uniqueOptions = CalculateUniqueOptions(rowify(gridOptions));
+    const uniqueOptions = CalculateUniqueOptions(gridOptions);
     this.setState({ uniqueOptions });
     console.table(uniqueOptions);
   }
 
   solveSol1(iterations) {
     const { grid } = iterateSolution1(this.state.grid, iterations);
-    //console.log(iterLeft);
     this.setState({ grid });
   }
 
@@ -85,7 +84,6 @@ class App extends Component {
     for (let i = 0; i < iterations; i++) {
       this.solveSol1(10);
       this.solveSol2(10);
-      //check if grid is solved and break;
     };
   }
 

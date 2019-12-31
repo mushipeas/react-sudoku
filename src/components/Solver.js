@@ -7,7 +7,7 @@ export function iterateSolution1(grid, iterLeft = 1) {
   iterLeft -= 1;
   console.log(`Run Sol 1. Iterations left: ${iterLeft}`);
 
-  // determines boxes that only have 1 option possible based on location
+  // determines elements that only have 1 option possible based on location
   for (let itemIndex in optionsGrid) {
     let options = optionsGrid[itemIndex];
     if (options.length === 1) {
@@ -24,7 +24,6 @@ export function iterateSolution1(grid, iterLeft = 1) {
   }
   grid = updateGrid(grid, updates);
 
-  // iterate till iterLeft 0
   if (iterLeft >= 1) {
     return iterateSolution1(grid, iterLeft)
   }
@@ -38,14 +37,13 @@ export function iterateSolution1(grid, iterLeft = 1) {
 
 export function iterateSolution2(grid, iterLeft = 1) {
   const optionsGrid = CalculateOptions(grid);
-  const optionsOptionsGrid = CalculateUniqueOptions(rowify(optionsGrid));
+  const uniqueOptionsGrid = CalculateUniqueOptions(optionsGrid);
   const updates = {};
   iterLeft -= 1;
   console.log(`Run Sol 2. Iterations left: ${iterLeft}`);
 
-  // determines boxes that only have 1 option possible based on location
-  for (let itemIndex in optionsOptionsGrid) {
-    let options = optionsOptionsGrid[itemIndex];
+  for (let itemIndex in uniqueOptionsGrid) {
+    let options = uniqueOptionsGrid[itemIndex];
     if (options.length === 1) {
       updates[itemIndex] = options[0];
     };
@@ -61,7 +59,6 @@ export function iterateSolution2(grid, iterLeft = 1) {
 
   grid = updateGrid(grid, updates);
 
-  // iterate
   if (iterLeft >= 1) {
     return iterateSolution2(grid, iterLeft)
   }
@@ -79,24 +76,11 @@ function updateGrid(grid, updates) {
     let rowIndex = Math.floor(itemIndex / 9);
     let colIndex = itemIndex - rowIndex * 9;
     console.log(`Changing ${rowIndex}:${colIndex},(${itemIndex})   :  ${updates[itemIndex]}`)
-    grid[rowIndex][colIndex] = updates[itemIndex];
+    grid[itemIndex] = updates[itemIndex];
   }
   return grid;
 }
 
-// needed because of the structural diff. between grid and optionsGrid - needs to be commonised later.
-// will probably need a 'row' function in CalculateOptions as exists for col and sqr.
-export function rowify(optionsGrid) {
-  let output = new Array(9).fill("").map(() => new Array(9).fill("").map(() => ""));
-  for (let rowIndex in output) {
-    for (let colIndex in output) {
-      output[rowIndex][colIndex] = optionsGrid[Number(colIndex) + Number(rowIndex) * 9];
-    }
-  }
-  //console.log(output)
-  return output;
-}
-
-export default { iterateSolution1, iterateSolution2, rowify };
+export default { iterateSolution1, iterateSolution2 };
 
 // test case https://www.websudoku.com/?level=1&set_id=9052917801
