@@ -20,10 +20,10 @@ class MainWindow extends Component {
         />
         <div className="grid-choices">
           <p>Scenarios:
-        <button onClick={() => this.props.emptyGrid()}>Empty Grid</button>
-            <button onClick={() => this.props.newGrid()}>New Grid 1</button>
-            <button onClick={() => this.props.newGrid2()}>New Grid 2</button>
-            <button onClick={() => this.props.newGrid3()}>New Grid 3</button>
+        <button onClick={() => this.props.newGrid()}>Empty Grid</button>
+            <button onClick={() => this.props.newGrid('grid_01')}>New Grid 01</button>
+            <button onClick={() => this.props.newGrid('grid_02')}>New Grid 02</button>
+            <button onClick={() => this.props.newGrid('grid_03')}>New Grid 03</button>
           </p>
         </div>
         <div className="check-sol-button">
