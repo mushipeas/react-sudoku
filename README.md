@@ -16,6 +16,8 @@ The iterative solver (now implemented) iteratively fills the grid, checking agai
 - No duplicate numbers in any row or column (18)
 - No duplicate numbers in any 3x3 region (9)
 
+The constraints-check only checks the current row, column and square `[3 constraints]` of the changed element per iteration, instead of all 27 stated above.
+
 The long-term plan is to use the iterations-to-solve (seen in the console) to gauge puzzle difficulty. This could be used as part of the puzzle generator to validate output.
 
 Currently: `max_iterations = 100000`

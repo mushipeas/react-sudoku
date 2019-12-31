@@ -113,7 +113,7 @@ class BruteSolve {
         grid[i]++;
       }
 
-      if (constraints_met.grid(grid) && grid[i] <= 9) {
+      if (constraints_met.element(grid, i) && grid[i] <= 9) {
         i++;
         while (i < 81 && orig_grid[i] !== "") {
           i++;
