@@ -76,12 +76,11 @@ class BruteSolve {
   }
 
   iterativeFill(orig_grid) {
-    let grid = clone_deep(orig_grid)
+    let grid = [...orig_grid]
 
     let i = 0
-    let j = 0
     
-    while ( i >= 0 && i < 9) {
+    while ( i >= 0 && i < 81) {
       
       this.iterations++;
 
@@ -92,36 +91,35 @@ class BruteSolve {
         // throw new Error('Unsolvable. Iteration limit hit.');
       }
       
-      if (orig_grid[i][j] !== "") {
-        [i, j] = this.nextCoordinate(i, j);
+      if (orig_grid[i] !== "") {
+        i++;
       }
       
-      if (grid[i][j] === "") {
-        grid[i][j] = 1;
+      if (grid[i] === "") {
+        grid[i] = 1;
       }
 
-      if (grid[i][j] > 9) {
-        grid[i][j] = "";
-        [i, j] = this.prevCoordinate(i, j)
-        while (i >= 0 && orig_grid[i][j] !== "") {
-          [i, j] = this.prevCoordinate(i, j);
+      if (grid[i] > 9) {
+        grid[i] = "";
+        i--;
+        while (i >= 0 && orig_grid[i] !== "") {
+          i--;
         }
         if (i<0) { // unsolvable
-          console.table(grid);
+          // console.log(grid);
           console.log(`Unsolvable. Iterations: ${this.iterations}`)
           return null
         } 
-        grid[i][j]++;
+        grid[i]++;
       }
 
-
-      if (constraints_met.grid(grid) && grid[i][j] <= 9) {
-        [i, j] = this.nextCoordinate(i, j);
-        while (i < 9 && orig_grid[i][j] !== "") {
-          [i, j] = this.nextCoordinate(i, j);
+      if (constraints_met.grid(grid) && grid[i] <= 9) {
+        i++;
+        while (i < 81 && orig_grid[i] !== "") {
+          i++;
         }
       } else {
-        grid[i][j]++;
+        grid[i]++;
       }
     }
 

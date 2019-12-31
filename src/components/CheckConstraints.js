@@ -5,7 +5,7 @@ class CheckConstraints {
     
     checkRows(grid) {
         for (let rowIndex = 0; rowIndex < 9; rowIndex++) {
-            let row = grid[rowIndex];
+            let row = grid.slice(rowIndex*9, rowIndex*9 + 9);
             if (this.hasDuplicates(row)) { return false }
         }
         return true;
@@ -13,7 +13,10 @@ class CheckConstraints {
     
     checkColumns(grid) {
         for (let columnIndex = 0; columnIndex < 9; columnIndex++) {
-            let column = grid.map(row => row[columnIndex]);
+            let column = []
+            for (let index = columnIndex; index < 81; index += 9) {
+                column.push(grid[index])
+            }
             if (this.hasDuplicates(column)) { return false }
         }
         return true;
@@ -21,9 +24,11 @@ class CheckConstraints {
     
     checkSquares(grid) {
         for (let squareIndex = 0; squareIndex < 9; squareIndex++) {
-            let square = grid.filter((val, rowIndex) => Math.floor(rowIndex / 3) === Math.floor(squareIndex / 3))
-                             .map(x => x.slice((squareIndex % 3) * 3, (squareIndex % 3) * 3 + 3))
-                             .flat();
+            const square = [];
+            for (let row = 0; row < 3; row++) {
+                let start = Math.floor(squareIndex / 3) * 27 + squareIndex % 3 * 3 + row * 9;
+                square.push(...grid.slice(start, start+3));
+            }
             if (this.hasDuplicates(square)) { return false }
         }
         return true;
