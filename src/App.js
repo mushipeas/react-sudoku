@@ -6,7 +6,6 @@ import RightBox from './components/RightBox';
 import CalculateOptions from './components/CalculateOptions';
 import CalculateUniqueOptions from './components/CalculateUniqueOptions';
 import IsSolutionCorrect from './components/IsSolutionCorrect';
-import { iterateSolution1, iterateSolution2 } from './components/Solver';
 import BruteSolver from './components/BruteSolver';
 import { grid_templates } from './common/grid_templates';
 
@@ -18,9 +17,6 @@ class App extends Component {
     this.updateGrid = this.updateGrid.bind(this);
     this.calcOptions = this.calcOptions.bind(this);
     this.calcUniqueOptions = this.calcUniqueOptions.bind(this);
-    this.solveSol1 = this.solveSol1.bind(this);
-    this.solveSol2 = this.solveSol2.bind(this);
-    this.attemptFullSolve = this.attemptFullSolve.bind(this);
     this.checkSolution = this.checkSolution.bind(this);
     this.bruteSolve = this.bruteSolve.bind(this);
 
@@ -70,23 +66,6 @@ class App extends Component {
     console.table(uniqueOptions);
   }
 
-  solveSol1(iterations) {
-    const { grid } = iterateSolution1(this.state.grid, iterations);
-    this.setState({ grid });
-  }
-
-  solveSol2(iterations) {
-    const { grid } = iterateSolution2(this.state.grid, iterations);
-    this.setState({ grid });
-  }
-
-  attemptFullSolve(iterations) {
-    for (let i = 0; i < iterations; i++) {
-      this.solveSol1(10);
-      this.solveSol2(10);
-    };
-  }
-
   bruteSolve() {
     const { grid } = this.bruteSolver.solve(this.state.grid);
     this.setState({ grid });
@@ -118,9 +97,6 @@ class App extends Component {
           <RightBox
             calcOptions={this.calcOptions}
             calcUniqueOptions={this.calcUniqueOptions}
-            solveSol1={this.solveSol1}
-            solveSol2={this.solveSol2}
-            attemptFullSolve={this.attemptFullSolve}
             bruteSolve={this.bruteSolve}
           />
         </div>

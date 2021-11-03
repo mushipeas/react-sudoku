@@ -39,12 +39,3 @@ This solver currently iterates over 2 methods to fill out the unsolved scenario.
 
     Method 2: (Hidden Singles)
         Iterates over all squares, checking all of its related squares to see if the selected square has any unique candidates in any of its 3 (row, col, sector) groups. Updates the grid with all such values found per run.
-
-### TO-DO
-
-    Method 3: (Naked/Hidden Pairs/Trips/Quads)
-        Iterates over all squares, checking all of its related squares to see which candidates must be in other squares in its 3 groups, removing those candidates and seeing if this leads to any new squares with 1 candidate.
-
-The 3 example scenarios:
-
-Currently Test 1 and Test 3 are solvable using a combination of methods 1 and 2. Testcase 2 may be solvable once Method 3 is implemented. Currently the iterative solver is the only guaranteed method for solving random scenarios.
