@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://mushipeas.github.io/react-sudoku/",
   "dependencies": {
-    "d3": "^4.13.0",
+    "d3": "^7.6.1",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-scripts": "^3.3.0"
